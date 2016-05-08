@@ -28,37 +28,13 @@ set hlsearch
 set foldlevelstart=100
 set foldmethod=indent
 
+" Allows variable settings for specific files
 set modelines=1
 
-" HTML and XML tabbing
-au FileType html,xml,xsl source ~/.vim/ftplugin/xml.vim
+" Column on the 81st line - helps for observing style conventions
 au FileType python,java,c set colorcolumn=81
 
-function! Expander()
-  let line   = getline(".")
-  let col    = col(".")
-  let first  = line[col-2]
-  let second = line[col-1]
-  let third  = line[col]
-
-  if first ==# ">"
-    if second ==# "<" && third ==# "/"
-      return "\<CR>\<C-o>==\<C-o>O"
-
-    else
-      return "\<CR>"
-
-    endif
-
-  else
-    return "\<CR>"
-
-  endif
-
-endfunction
-
-inoremap <expr> <CR> Expander()
-
+" Enable syntax highlighting
 syntax enable
 
 " colorscheme vexorian
@@ -152,14 +128,14 @@ function! s:CloseIfOnlyNerdTreeLeft()
 	endif
 endfunction
 
-" For all text files set 'textwidth' to 78
+" For all text files set 'textwidth' to 80
 " characters.
-autocmd FileType text setlocal textwidth=78
+autocmd FileType text setlocal textwidth=80
 
-" When editing a file, always jump to the last known cursor position.  Don't do.
-" it when the position is invalid or when inside an event handler (happens when.
+" When editing a file, always jump to the last known cursor position.  Don't do
+" it when the position is invalid or when inside an event handler (happens when
 " dropping a file on gvim). Also don't do it when the mark is in the first line.
-" " that is the default position when opening a file.
+" that is the default position when opening a file.
 autocmd BufReadPost *
    \ if line("'\"") > 1 && line("'\"") <= line("$") |
    \   exe "normal! g`\"" |
@@ -170,18 +146,17 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 
 set laststatus=2
-" " Syntastic options
+" Syntastic options
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-set statusline+=%f
-set statusline+=%5(%)
-set statusline+=[%{strftime(\"%c\",getftime(expand(\"%:p\")))}]
-set statusline+=%=
-set statusline+=line:\%l\ col:\%c
-set statusline+=%5(%)
 
-
+" set statusline+=%*
+" set statusline+=%f
+" set statusline+=%5(%)
+" set statusline+=[%{strftime(\"%c\",getftime(expand(\"%:p\")))}]
+" set statusline+=%=
+" set statusline+=line:\%l\ col:\%c
+" set statusline+=%5(%)
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_loc_list_height=3
 let g:syntastic_auto_loc_list = 1
@@ -203,6 +178,8 @@ call vundle#begin()
 " Cool statusbar
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+
+" Plugin to generate bash prompt line
 Bundle 'edkolev/promptline.vim'
 
 " Automatic ctags cleanup on file writes
@@ -216,6 +193,9 @@ Plugin 'ScrollColors'
 
 " Syntax checking
 Plugin 'scrooloose/syntastic'
+
+" Convenient completion for XML/HTML
+Plugin 'othree/xml.vim'
 
 " Press t to toggle tagbar.
 Plugin 'majutsushi/tagbar'
