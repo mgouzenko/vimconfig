@@ -165,10 +165,6 @@ autocmd BufReadPost *
    \   exe "normal! g`\"" |
    \ endif
 
-" Pathogen load
-call pathogen#infect()
-call pathogen#helptags()
-
 let g:airline_theme="xtermlight"
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -199,7 +195,6 @@ let g:ycm_show_diagnostics_ui = 0
 
 " change vimwiki root
 let g:vimwiki_list = [{ 'path': '~/google_drive'}]
-execute pathogen#infect()
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
