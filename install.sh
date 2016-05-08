@@ -1,3 +1,14 @@
+#!/bin/bash
+if [ -e "$HOME/.vim" ]; then
+	echo "~/.vim directory detected, aborting"
+	exit
+fi
+
+if [ -e "$HOME/.vimrc" ]; then
+	echo "~/.vimrc detected, aborting"
+	exit
+fi
+
 # Vundle is a package manager, used to install packages to .vim/bundle
 # TODO: make it a submodule
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim

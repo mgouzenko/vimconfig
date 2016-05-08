@@ -31,6 +31,11 @@ basic understanding of all of them before proceeding:
    convenience command for invoking ctags (I will cover this later).
 
 ### All Vim versions
+
+## Preparation
+Before you install, you need to make sure that you've gotten rid of your ~/.vim
+directory and your ~/.vimrc, or at least put those files somewhere safe.
+
     $ git clone https://github.com/mgouzenko/vimconfig ~/.vim
 	$ cd ~/.vim
 	$ ./install.sh
