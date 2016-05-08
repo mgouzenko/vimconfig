@@ -205,8 +205,23 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Bundle 'edkolev/promptline.vim'
 
+" Automatic ctags cleanup on file writes
+Plugin 'craigemery/vim-autotag'
+
+" Adapt graphical vim colorschemes to terminal vim
+Plugin 'godlygeek/csapprox'
+
+" Scroll through color schemes
+Plugin 'ScrollColors'
+
+" Syntax checking
+Plugin 'scrooloose/syntastic'
+
 " Press t to toggle tagbar.
 Plugin 'majutsushi/tagbar'
+
+" gc to toggle comments
+Plugin 'tomtom/tcomment_vim'
 
 " Browse the file system
 Plugin 'scrooloose/nerdtree'
