@@ -67,6 +67,9 @@ nnoremap <silent> <leader>ev :vsplit $MYVIMRC<cr>
 " Quickly source "vimrc
 nnoremap <silent> <leader>sv :source $MYVIMRC<cr>
 
+" Open Nerdtree
+nnoremap <silent> <leader>n :NERDTree<cr>
+
 " Wrap word in quotes
 nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
