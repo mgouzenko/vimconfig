@@ -20,7 +20,6 @@ if you plan to use Vim in the long term.
 ![Alt text](./screenshots/intro_screenshot.png)
 
 # Installation
-I plan to write a *real* installation guide in the future. In the meantime, do
-not, I repeat DO NOT run any commands in this repo without first understanding
-what they do. There is stuff in here that will destroy all of your current vim
-configs, so understand all scripts before running them.
+    $ git clone https://github.com/mgouzenko/vimconfig ~/.vim || exit
+	$ cd ~/.vim
+	$ ./install.sh
