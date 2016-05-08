@@ -25,9 +25,9 @@ if you plan to use Vim in the long term.
 The installation script in this repo does a few things. Make sure you have a
 basic understanding of all of them before proceeding:
 
-1) It installs Vundle, a package manager. I'll touch more on this later.
-2) It uses Vundle to install the packages specified in vimrc.
-3) It appends the `index` alias to your .bash\_profile. This alias is a
+1. It installs Vundle, a package manager. I'll touch more on this later.
+2. It uses Vundle to install the packages specified in vimrc.
+3. It appends the `index` alias to your .bash\_profile. This alias is a
    convenience command for invoking ctags (I will cover this later).
 
 ### All Vim versions
@@ -67,14 +67,14 @@ the vim promptline plugin helps to generate a really cool bash prompt.
 ![Alt text](./screenshots/prompt.png)
 
 The generated prompt can be configured to do many things, but these are the
-most important for me, personally:
+most important for me personally:
 
-1) Smart directory listing: the prompt calculates how deep you are in your
-   file system, and abbreviates the path so that it doesn't get too long.
-2) Git branch: if you're in a git repo, the prompt tells you which branch
-   you're on.
-3) Hostname: The promptline lists the hostname, but only if you've ssh'ed
-   into the machine.
+1. **Smart directory listing:** the prompt calculates how deep you are in your
+file system, and abbreviates the path so that it doesn't get too long.
+2. **Git branch:** if you're in a git repo, the prompt tells you which branch
+you're on.
+3. **Hostname:** The promptline lists the hostname, but only if you've ssh'ed
+into the machine.
 
 To get a basic promptline going, you need powerline. Once you have that installed
 properly, you can run the following script to generate and install a better promptline:
