@@ -1,9 +1,4 @@
 #!/bin/bash
-if [ -e "$HOME/.vim" ]; then
-	echo "~/.vim directory detected, aborting"
-	exit
-fi
-
 if [ -e "$HOME/.vimrc" ]; then
 	echo "~/.vimrc detected, aborting"
 	exit
