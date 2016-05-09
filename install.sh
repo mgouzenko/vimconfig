@@ -11,5 +11,12 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 # Install all plugins
 vim +PluginInstall +qall
 
+# Compile YCM for code completion
+cd ~/.vim/bundle/YouCompleteMe
+./install.sh --clang-completer
+
+# Install Exuberant ctags with Homebrew
+brew install ctags
+
 # Good alias to add to bashrc
 echo "alias index='ctags -R --exclude=.git --exclude=log .'" >> ~/.bash_profile
