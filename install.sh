@@ -15,8 +15,15 @@ vim +PluginInstall +qall
 cd ~/.vim/bundle/YouCompleteMe
 ./install.sh --clang-completer
 
-# Install Exuberant ctags with Homebrew
-brew install ctags
+# Install Exuberant ctags
+if [[ `uname` == 'Darwin' ]]; then
+	# MacOS
+	brew install ctags
+else
+	# Linux (Only Ubuntu supported for now).  If you're running a more esoteric
+	# distro, I trust you know what needs to be done.
+	sudo apt-get install exuberant-ctags
+fi
 
 # Good alias to add to bashrc
 echo "alias index='ctags -R --exclude=.git --exclude=log .'" >> ~/.bash_profile
