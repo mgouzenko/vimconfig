@@ -3,8 +3,6 @@ set autoindent
 set tabstop=4
 set noexpandtab
 set shiftwidth=4
-filetype indent on
-filetype plugin on
 set nocompatible
 set backspace=2
 set number
@@ -45,15 +43,25 @@ colorscheme desertEx
 " colorscheme smyck
 
 " Key Mapping {{{
+
+" Ctrl-left, Ctrl-right cycle through tabs. You need to configure your
+" terminal to send the <ESC>B and <ESC>F escape sequences.
 nnoremap <silent> <ESC>B :tabprevious<CR>
 nnoremap <silent> <ESC>F :tabnext<CR>
+
+" Lowercase t toggles the tagbar in normal mode
 nnoremap <silent> t :Tagbar<CR>
-" nnoremap <Return> za
-nnoremap <Return> <c-]>
-noremap <C-j> :resize +3<CR>
-noremap <C-k> :resize -3<CR>
-noremap <C-h> :vertical resize -3<CR>
-noremap <C-l> :vertical resize +3<CR>
+
+" Hitting enter jumps to the first tag found, if there IS one.
+nnoremap <silent><Return> :silent! execute "normal \<lt>c-]>" <CR>
+
+" Ctrl-hjkl resizes windows
+nnoremap <silent><C-j> :resize +3<CR>
+nnoremap <silent><C-k> :resize -3<CR>
+nnoremap <silent><C-h> :vertical resize -3<CR>
+nnoremap <silent><C-l> :vertical resize +3<CR>
+
+" Use arrow keys to navigate window splits
 nnoremap <silent> <Right> :wincmd l <CR>
 nnoremap <silent> <Left> :wincmd h <CR>
 noremap <silent> <Up> :wincmd k <CR>
@@ -176,6 +184,7 @@ let g:vimwiki_list = [{ 'path': '~/google_drive'}]
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
+filetype off
 call vundle#begin()
 
 " Cool statusbar
@@ -244,5 +253,5 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
-
+filetype plugin indent on
 " vim:foldmethod=marker:foldlevel=0
