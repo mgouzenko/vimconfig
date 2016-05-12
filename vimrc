@@ -54,6 +54,7 @@ nnoremap <silent> t :Tagbar<CR>
 
 " Hitting enter jumps to the first tag found, if there IS one.
 nnoremap <silent><Return> :silent! execute "normal \<lt>c-]>" <CR>
+nnoremap <silent><bs> :silent! execute "normal \<lt>c-t>" <CR>
 
 " Ctrl-hjkl resizes windows
 nnoremap <silent><C-j> :resize +3<CR>
