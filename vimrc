@@ -35,6 +35,8 @@ au FileType python,java,c set colorcolumn=81
 " Enable syntax highlighting
 syntax enable
 
+set background=light
+" colorscheme solarized
 " colorscheme vexorian
 " colorscheme newspaper
 " colorscheme dejavu
@@ -199,7 +201,8 @@ Bundle 'edkolev/promptline.vim'
 Plugin 'craigemery/vim-autotag'
 
 " Adapt graphical vim colorschemes to terminal vim
-Plugin 'godlygeek/csapprox'
+" Plugin 'godlygeek/csapprox'
+" Plugin 'noah/vim256-color'
 
 " Scroll through color schemes
 Plugin 'ScrollColors'
@@ -244,8 +247,12 @@ Plugin 'tpope/vim-fugitive'
 " Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
 
+" Skeltons for common filetypes
+Plugin 'noahfrederick/vim-skeleton'
+
 " All of your Plugins must be added before the following line
 call vundle#end()
+
 
 " Trigger configuration.
 let g:UltiSnipsExpandTrigger="<c-j>"
