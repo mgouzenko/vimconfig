@@ -66,8 +66,11 @@ nnoremap <silent> <ESC>F :tabnext<CR>
 nnoremap <silent> t :Tagbar<CR>
 
 " Hitting enter jumps to the first tag found, if there IS one.
-nnoremap <silent><Return> :silent! execute "normal \<lt>c-]>" <CR>
-nnoremap <silent><bs> :silent! execute "normal \<lt>c-t>" <CR>
+" nnoremap <silent><C-Return> :silent! execute "normal \<lt>c-]>" <CR>
+" nnoremap <silent><C-bs> :silent! execute "normal \<lt>c-t>" <CR>
+
+nnoremap <silent><Return> :YcmCompleter GoTo <cr>
+nnoremap <bs> <C-o>
 
 " Ctrl-hjkl resizes windows
 nnoremap <silent><C-j> :resize +3<CR>
