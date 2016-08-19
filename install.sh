@@ -25,5 +25,6 @@ else
 	sudo apt-get install exuberant-ctags
 fi
 
-# Good alias to add to bashrc
-echo "alias index='ctags -R --exclude=.git --exclude=log .'" >> ~/.bash_profile
+# Good alias to add to bashrc. This will recursively index the current
+# directory, dumping all the ctags into a file called .tags
+echo "alias index='ctags -R --exclude=.git --exclude=log -f .tags .'" >> ~/.bash_profile
