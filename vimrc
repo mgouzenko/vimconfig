@@ -2,9 +2,10 @@
 " Pick up hidden tag files
 set tags+=.tags
 set autoindent
-set tabstop=4
+set tabstop=8
+set softtabstop=2
 set noexpandtab
-set shiftwidth=4
+set shiftwidth=2
 set nocompatible
 set backspace=2
 set number
@@ -32,6 +33,7 @@ set modelines=1
 
 " Column on the 81st line - helps for observing style conventions
 au FileType python,java,c,vim set colorcolumn=81
+au FileType c setlocal softtabstop=8 shiftwidth=8
 
 " Enable syntax highlighting
 syntax enable
@@ -197,7 +199,7 @@ au FileType python setlocal textwidth=80
 
 " formatoptions {{{
 " Autoformat text
-au FileType text setlocal formatoptions+=an
+au FileType text setlocal formatoptions+=tn
 
 au FileType python setlocal formatoptions=qrjcb
 " }}}
@@ -240,6 +242,8 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 
 " allow ycm to play nicely with syntastic
 let g:ycm_show_diagnostics_ui = 0
+
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_config.py'
 " }}}
 
 " vim-notes {{{
@@ -257,7 +261,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
 " Plugin to generate bash prompt line
-Bundle 'edkolev/promptline.vim'
+Plugin 'edkolev/promptline.vim'
 
 " Automatic ctags cleanup on file writes. This plugin searches parent
 " directories for any .tags files and removes stale tags.
@@ -310,6 +314,9 @@ Plugin 'noahfrederick/vim-skeleton'
 
 " Toggle between things like True/False
 Plugin 'AndrewRadev/switch.vim'
+
+" Go between one liners and multi liners
+Plugin 'AndrewRadev/splitjoin.vim'
 
 " Navigate markers easily
 Plugin 'kshenoy/vim-signature'
