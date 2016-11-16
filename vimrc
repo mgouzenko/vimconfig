@@ -94,6 +94,7 @@ let mapleader=","
 
 " Quickly edit vimrc
 nnoremap <silent> <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <silent> <leader><cr> o<esc>
 
 " Quickly source "vimrc
 nnoremap <silent> <leader>lv :source $MYVIMRC<cr>
@@ -255,6 +256,9 @@ let g:notes_directories = ['~/google_drive/notes']
 set rtp+=~/.vim/bundle/Vundle.vim
 filetype off
 call vundle#begin()
+
+" Liquid templating for Jekyll
+Plugin 'tpope/vim-liquid'
 
 " Cool statusbar
 Plugin 'vim-airline/vim-airline'
