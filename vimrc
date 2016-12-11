@@ -9,6 +9,7 @@ set shiftwidth=2
 set nocompatible
 set backspace=2
 set number
+set relativenumber
 set encoding=utf-8
 
 " Highlight the current line.
@@ -102,14 +103,9 @@ nnoremap <silent> <leader>lv :source $MYVIMRC<cr>
 " Open Nerdtree
 nnoremap <silent> <leader>n :NERDTree<cr>
 
-" Wrap word in quotes
-nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
-nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
-
 " Toggle between things like True/False with Radev's switch plugin
 nnoremap <silent> <leader>s :Switch<cr>
 
-" Not sure what this does
 " nnoremap <leader>s :mksession<CR>
 
 " Move visually (instead of by line number)
@@ -157,12 +153,10 @@ highlight ExtraWhitespace ctermbg=darkgreen ctermfg=white guibg=#FFD9D9
 
 function! AdjustWhitespaceEnter()
 	match ExtraWhitespace /\s\+\%#\@<!$/
-	" call matchadd('OverLength', '\%>80v.\+')
 endfunction
 
 function! AdjustWhitespaceExit()
 	match ExtraWhitespace /\s\+$/
-	" call matchadd('OverLength', '\%>80v.\+')
 endfunction
 
 au InsertEnter * call AdjustWhitespaceEnter()
@@ -251,6 +245,10 @@ let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_config.py'
 let g:notes_directories = ['~/google_drive/notes']
 " }}}
 
+" VimWiki {{{
+let g:vimwiki_list = [ {'path': '~/google_drive/vimwiki' } ]
+" }}}
+
 " Vundle {{{
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -263,9 +261,6 @@ Plugin 'tpope/vim-liquid'
 " Cool statusbar
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-
-" Plugin to generate bash prompt line
-Plugin 'edkolev/promptline.vim'
 
 " Automatic ctags cleanup on file writes. This plugin searches parent
 " directories for any .tags files and removes stale tags.
@@ -304,13 +299,16 @@ Plugin 'Valloric/YouCompleteMe'
 " Notes
 Plugin 'xolox/vim-notes'
 
+" vim wiki
+Plugin 'vimwiki/vimwiki'
+
 " Vim misc required by vim notes
 Plugin 'xolox/vim-misc'
 
 " Git plugin
 Plugin 'tpope/vim-fugitive'
 
-" Snippets are separated from the engine. Add this if you want them:
+" Snippets are separated from the engine.
 Plugin 'honza/vim-snippets'
 
 " Skeltons for common filetypes
@@ -319,7 +317,7 @@ Plugin 'noahfrederick/vim-skeleton'
 " Toggle between things like True/False
 Plugin 'AndrewRadev/switch.vim'
 
-" Go between one liners and multi liners
+" Go between one liners and multi liners - gS and gJ
 Plugin 'AndrewRadev/splitjoin.vim'
 
 " Navigate markers easily
@@ -333,6 +331,9 @@ Plugin 'jiangmiao/auto-pairs'
 
 " Move function arguments around easily.
 Plugin 'AndrewRadev/sideways.vim'
+
+" Highlight code visually and surround it with S
+Plugin 'tpope/vim-surround'
 
 " All of your Plugins must be added before the following line
 call vundle#end()
