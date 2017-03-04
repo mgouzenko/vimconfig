@@ -12,6 +12,9 @@ set number
 set relativenumber
 set encoding=utf-8
 
+" Set grep program to always generate a file-name.
+set grepprg=grep\ -nH\ $*
+
 " Highlight the current line.
 set cursorline
 
@@ -59,6 +62,7 @@ autocmd BufWritePost *
 " }}}
 " Key Mapping {{{
 inoremap jj <Esc>
+inoremap jk <Esc>
 
 " Ctrl-left, Ctrl-right cycle through tabs. You need to configure your
 " terminal to send the <ESC>B and <ESC>F escape sequences.
@@ -111,6 +115,15 @@ nnoremap <silent> <leader>s :Switch<cr>
 " Move visually (instead of by line number)
 nnoremap j gj
 nnoremap k gk
+
+
+" Go to the next marker with ctrl-right. This is hacky as hell and depends on
+" the sequence sent to vim by the terminal for ctrl-right. Need to fix this
+" later.
+nmap F ']
+
+" As above, but for ctrl-left.
+nmap B '[
 
 " Mark navigation mapping
 let g:SignatureMap = {
@@ -219,6 +232,8 @@ set laststatus=2
 " }}}
 
 " Syntastic {{{
+let g:syntastic_java_javac_classpath = "/Users/mgouzenko/google_drive/columbia_university/Classes/eighth_semester/graphics/hw3/pa2_release/src:/Users/mgouzenko/google_drive/columbia_university/Classes/eighth_semester/graphics/hw3/pa2_release/lib/joml-1.9.2.jar:/Users/mgouzenko/google_drive/columbia_university/Classes/eighth_semester/graphics/hw3/pa2_release/lib/PNGDecoder.jar:/Users/mgouzenko/google_drive/columbia_university/Classes/eighth_semester/graphics/hw3/pa2_release/lib/pngj-2.1.1.jar:/Users/mgouzenko/google_drive/columbia_university/Classes/eighth_semester/graphics/hw3/pa2_release/lib/lwjgl/*.jar"
+
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 
@@ -249,27 +264,52 @@ let g:notes_directories = ['~/google_drive/notes']
 let g:vimwiki_list = [ {'path': '~/google_drive/vimwiki' } ]
 " }}}
 
+" JavaComplete {{{
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
+" }}}
+
+" Vim rooter {{{
+let g:rooter_change_directory_for_non_project_files = 'current'
+" }}}
+
+" vim-session {{{
+let g:session_autoload = 'yes'
+let g:session_autosave = 'yes'
+" }}}
+
 " Vundle {{{
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 filetype off
 call vundle#begin()
 
+" Session management with :SaveSession and :OpenSession
+Plugin 'xolox/vim-session'
+
+" Change root to project root when editing file in vim.
+Plugin 'airblade/vim-rooter'
+
+" Java completion, integrates directly with omnibar for tab completion. Can
+" make opening java files a little slow.
+Plugin 'artur-shaik/vim-javacomplete2'
+
 " Liquid templating for Jekyll
 Plugin 'tpope/vim-liquid'
 
-" Cool statusbar
+" statusbar
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
 " Automatic ctags cleanup on file writes. This plugin searches parent
 " directories for any .tags files and removes stale tags.
+"
+" haven't used this for a while - may remove soon.
 Plugin 'craigemery/vim-autotag'
 
 " Scroll through color schemes
 Plugin 'ScrollColors'
 
-" Syntax checking
+" Syntax checking - can cause open to be slow, especially for java
 Plugin 'scrooloose/syntastic'
 
 " Convenient completion for XML/HTML
