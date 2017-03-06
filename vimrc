@@ -95,6 +95,9 @@ noremap <silent> <Down> :wincmd j <CR>
 nnoremap <silent> > :SidewaysRight <CR>
 nnoremap <silent> < :SidewaysLeft <CR>
 
+" s to save the current session as default
+nnoremap <silent> s :SaveSession default<CR>
+
 let mapleader=","
 
 " Quickly edit vimrc
@@ -177,6 +180,7 @@ au InsertLeave * call AdjustWhitespaceExit()
 
 " }}}
 " Plugin Settings {{{
+
 " vim-autotag {{{
 " Have vim-autotag look for a .tags file instead of a tags file.
 let g:autotagTagsFile=".tags"
@@ -277,11 +281,21 @@ let g:session_autoload = 'yes'
 let g:session_autosave = 'yes'
 " }}}
 
+" Rainbow parentheses {{{
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+" }}}
+
 " Vundle {{{
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 filetype off
 call vundle#begin()
+
+" Make parentheses different colors to distinguish them
+Plugin 'kien/rainbow_parentheses.vim'
 
 " Session management with :SaveSession and :OpenSession
 Plugin 'xolox/vim-session'
@@ -324,17 +338,20 @@ Plugin 'tomtom/tcomment_vim'
 " Browse the file system
 Plugin 'scrooloose/nerdtree'
 
-" Track the engine.
-Plugin 'SirVer/ultisnips'
-
 " Fuzzy search
 Plugin 'kien/ctrlp.vim'
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
+" Snippets are separated from the engine.
+Plugin 'honza/vim-snippets'
+
 " Autocompletion
 Plugin 'Valloric/YouCompleteMe'
+
+" Snippet expansion.
+Plugin 'SirVer/ultisnips'
 
 " Notes
 Plugin 'xolox/vim-notes'
@@ -347,9 +364,6 @@ Plugin 'xolox/vim-misc'
 
 " Git plugin
 Plugin 'tpope/vim-fugitive'
-
-" Snippets are separated from the engine.
-Plugin 'honza/vim-snippets'
 
 " Skeltons for common filetypes
 Plugin 'noahfrederick/vim-skeleton'
@@ -374,6 +388,9 @@ Plugin 'AndrewRadev/sideways.vim'
 
 " Highlight code visually and surround it with S
 Plugin 'tpope/vim-surround'
+
+" Highlight string replacement as you type.
+Plugin 'osyo-manga/vim-over'
 
 " All of your Plugins must be added before the following line
 call vundle#end()
