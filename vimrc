@@ -3,9 +3,9 @@
 set tags+=.tags
 set autoindent
 set tabstop=8
-set softtabstop=2
-set noexpandtab
-set shiftwidth=2
+set softtabstop=4
+set expandtab
+set shiftwidth=4
 set nocompatible
 set backspace=2
 set number
@@ -36,8 +36,9 @@ set foldmethod=indent
 set modelines=1
 
 " Column on the 81st line - helps for observing style conventions
-au FileType python,java,c,vim set colorcolumn=81
+au FileType python,java,c,vim,text set colorcolumn=81
 au FileType c setlocal softtabstop=8 shiftwidth=8
+au FileType java setlocal softtabstop=4 shiftwidth=4
 
 " Enable syntax highlighting
 syntax enable
@@ -69,13 +70,19 @@ inoremap jk <Esc>
 nnoremap <silent> <ESC>B :tabprevious<CR>
 nnoremap <silent> <ESC>F :tabnext<CR>
 
+" Map f to quickly jump to a line in normal mode using EasyMotion
+nmap F <Plug>(easymotion-overwin-line)
+nmap f <Plug>(easymotion-bd-w)
+
 " Lowercase t toggles the tagbar in normal mode
 nnoremap <silent> t :Tagbar<CR>
 
-" Hitting enter jumps to the first tag found, if there IS one.
+" OLD: Hitting enter jumps to the first tag found, if there IS one.
 " nnoremap <silent><C-Return> :silent! execute "normal \<lt>c-]>" <CR>
 " nnoremap <silent><C-bs> :silent! execute "normal \<lt>c-t>" <CR>
-
+"
+" NEW: Hitting enter invokes YCM GoTo. Backspace goes back to the last
+" location. Locations can be navigated with C-i and C-o as well.
 nnoremap <silent><Return> :YcmCompleter GoTo <cr>
 nnoremap <bs> <C-o>
 
@@ -113,12 +120,9 @@ nnoremap <silent> <leader>n :NERDTree<cr>
 " Toggle between things like True/False with Radev's switch plugin
 nnoremap <silent> <leader>s :Switch<cr>
 
-" nnoremap <leader>s :mksession<CR>
-
 " Move visually (instead of by line number)
 nnoremap j gj
 nnoremap k gk
-
 
 " Go to the next marker with ctrl-right. This is hacky as hell and depends on
 " the sequence sent to vim by the terminal for ctrl-right. Need to fix this
@@ -204,16 +208,14 @@ autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 " }}}
 
 " textwidth {{{
-" For all text files set 'textwidth' to 80 characters.
-au FileType text setlocal textwidth=80
-au FileType python setlocal textwidth=80
+" Set 'textwidth' to 80 characters.
+au FileType text,python,c setlocal textwidth=80
 " }}}
 
 " formatoptions {{{
 " Autoformat text
 au FileType text setlocal formatoptions+=tn
-
-au FileType python setlocal formatoptions=qrjcb
+au FileType python,c,java setlocal formatoptions=qrjcb
 " }}}
 
 " UltiSnips {{{
@@ -285,7 +287,30 @@ let g:session_autosave = 'yes'
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
+
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['red',         'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['gray',        'firebrick3']
+    \ ]
+" au Syntax * RainbowParenthesesLoadBraces
+" }}}
+
+" IndentLine {{{
+let g:indentLine_char = '│'
 " }}}
 
 " Vundle {{{
@@ -293,6 +318,16 @@ au Syntax * RainbowParenthesesLoadBraces
 set rtp+=~/.vim/bundle/Vundle.vim
 filetype off
 call vundle#begin()
+
+" Navigate Vimium-style
+Plugin 'easymotion/vim-easymotion'
+
+" Run YcmGenerateConfig from root of project to create a .ycm_extra_config.py
+" for C-family projects.
+Plugin 'rdnetto/YCM-Generator'
+
+" Highlighting for GLSL, OpenGL's shading language
+Plugin 'tikhomirov/vim-glsl'
 
 " Make parentheses different colors to distinguish them
 Plugin 'kien/rainbow_parentheses.vim'
@@ -392,7 +427,10 @@ Plugin 'tpope/vim-surround'
 " Highlight string replacement as you type.
 Plugin 'osyo-manga/vim-over'
 
-" All of your Plugins must be added before the following line
+" Displays vertical lines at each indentation level for code indented w/ spaces
+Plugin 'Yggdroot/indentLine'
+
+" All Plugins must be added before the following line.
 call vundle#end()
 
 filetype plugin indent on
