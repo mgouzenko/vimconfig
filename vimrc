@@ -83,7 +83,9 @@ nnoremap <silent> t :Tagbar<CR>
 "
 " NEW: Hitting enter invokes YCM GoTo. Backspace goes back to the last
 " location. Locations can be navigated with C-i and C-o as well.
-nnoremap <silent><Return> :YcmCompleter GoTo <cr>
+" nnoremap <silent><Return> :YcmCompleter GoTo <cr>
+
+" Backspace goes backwards in the jumplist
 nnoremap <bs> <C-o>
 
 " Ctrl-hjkl resizes windows
@@ -157,8 +159,12 @@ let g:SignatureMap = {
         \ 'ListBufferMarkers'  :  "m?"
         \ }
 
-" Use space to eliminate highlighting after search
-nnoremap <silent> <Space> :noh \| :lcl <CR>
+" When going into insert mode, clear search
+autocmd InsertEnter * :let b:_search=@/|let @/=''
+autocmd InsertLeave * :let @/=get(b:,'_search','')
+
+" Pop open location list with spacebar
+nnoremap <silent> <Space> :call ToggleLocationList()<CR>
 
 " }}}
 " Highlighting {{{
@@ -184,6 +190,7 @@ au InsertLeave * call AdjustWhitespaceExit()
 
 " }}}
 " Plugin Settings {{{
+
 
 " vim-autotag {{{
 " Have vim-autotag look for a .tags file instead of a tags file.
@@ -243,9 +250,6 @@ let g:syntastic_java_javac_classpath = "/Users/mgouzenko/google_drive/columbia_u
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_loc_list_height=3
-let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_cpp_compiler = "g++"
@@ -318,6 +322,11 @@ let g:indentLine_char = '│'
 set rtp+=~/.vim/bundle/Vundle.vim
 filetype off
 call vundle#begin()
+
+Plugin 'mgouzenko/codesearch_selector.vim'
+
+" Allow cscope searches from inside Vim.
+Plugin 'vim-scripts/cscope.vim'
 
 " Navigate Vimium-style
 Plugin 'easymotion/vim-easymotion'
