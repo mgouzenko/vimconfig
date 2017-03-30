@@ -62,8 +62,14 @@ autocmd BufWritePost *
       \ endif
 " }}}
 " Key Mapping {{{
+" Insert mode remapping {{{
 inoremap jj <Esc>
 inoremap jk <Esc>
+
+" Emacs-style ctrl-a and ctrl-e to get to the beginning and end of line.
+inoremap <c-a> <Esc>^i
+inoremap <c-e> <Esc>A
+" }}}
 
 " Ctrl-left, Ctrl-right cycle through tabs. You need to configure your
 " terminal to send the <ESC>B and <ESC>F escape sequences.
