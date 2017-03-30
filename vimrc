@@ -71,6 +71,10 @@ inoremap <c-a> <Esc>^i
 inoremap <c-e> <Esc>A
 " }}}
 
+" Auto indent pasted text
+nnoremap p p=`]<C-o>
+nnoremap P P=`]<C-o>
+
 " Ctrl-left, Ctrl-right cycle through tabs. You need to configure your
 " terminal to send the <ESC>B and <ESC>F escape sequences.
 nnoremap <silent> <ESC>B :tabprevious<CR>
