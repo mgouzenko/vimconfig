@@ -28,6 +28,15 @@ set incsearch
 " Highlight when searching
 set hlsearch
 
+" Scrolling
+"Don't wrap lines
+set nowrap
+set sidescrolloff=15
+set sidescroll=1
+
+" Start scrolling when we're 8 lines away from margins
+set scrolloff=8
+
 " Folding
 set foldlevelstart=100
 set foldmethod=indent
@@ -290,6 +299,7 @@ autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
 " Vim rooter {{{
 let g:rooter_change_directory_for_non_project_files = 'current'
+let g:rooter_patterns = ['Rakefile', '.git/', 'build.xml']
 " }}}
 
 " vim-session {{{
@@ -332,6 +342,10 @@ let g:indentLine_char = '│'
 set rtp+=~/.vim/bundle/Vundle.vim
 filetype off
 call vundle#begin()
+
+Plugin 'mkarmona/materialbox'
+
+Plugin 'godlygeek/csapprox'
 
 Plugin 'mgouzenko/codesearch_selector.vim'
 
