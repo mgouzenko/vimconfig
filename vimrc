@@ -49,12 +49,6 @@ au FileType python,java,c,vim,text set colorcolumn=81
 au FileType c setlocal softtabstop=8 shiftwidth=8
 au FileType java setlocal softtabstop=4 shiftwidth=4
 
-" Enable syntax highlighting
-syntax enable
-
-set background=light
-colorscheme desertEx
-
 " When editing a file, always jump to the last known cursor position.  Don't do
 " it when the position is invalid or when inside an event handler (happens when
 " dropping a file on gvim). Also don't do it when the mark is in the first line.
@@ -72,8 +66,8 @@ autocmd BufWritePost *
 " }}}
 " Key Mapping {{{
 " Insert mode remapping {{{
-inoremap jj <Esc>
 inoremap jk <Esc>
+inoremap jj <Esc>
 
 " Emacs-style ctrl-a and ctrl-e to get to the beginning and end of line.
 inoremap <c-a> <Esc>^i
@@ -210,7 +204,10 @@ au InsertLeave * call AdjustWhitespaceExit()
 " }}}
 " Plugin Settings {{{
 
-
+" neodark {{{
+let g:neodark#solid_vertsplit = 1
+" }}}
+"
 " vim-autotag {{{
 " Have vim-autotag look for a .tags file instead of a tags file.
 let g:autotagTagsFile=".tags"
@@ -255,7 +252,7 @@ let g:UltiSnipsEditSplit="vertical"
 " }}}
 
 " Airline {{{
-let g:airline_theme="xtermlight"
+" let g:airline_theme="xtermlight"
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 
@@ -264,7 +261,13 @@ set laststatus=2
 " }}}
 
 " Syntastic {{{
-let g:syntastic_java_javac_classpath = "/Users/mgouzenko/google_drive/columbia_university/Classes/eighth_semester/graphics/hw3/pa2_release/src:/Users/mgouzenko/google_drive/columbia_university/Classes/eighth_semester/graphics/hw3/pa2_release/lib/joml-1.9.2.jar:/Users/mgouzenko/google_drive/columbia_university/Classes/eighth_semester/graphics/hw3/pa2_release/lib/PNGDecoder.jar:/Users/mgouzenko/google_drive/columbia_university/Classes/eighth_semester/graphics/hw3/pa2_release/lib/pngj-2.1.1.jar:/Users/mgouzenko/google_drive/columbia_university/Classes/eighth_semester/graphics/hw3/pa2_release/lib/lwjgl/*.jar"
+let g:syntastic_java_javac_classpath = '
+            \/home/mgouzenko/Documents/graphics/pa5_release/src:
+            \/home/mgouzenko/Documents/graphics/pa5_release/lib/joml-1.9.2.jar:
+            \/home/mgouzenko/Documents/graphics/pa5_release/lib/PNGDecoder.jar:
+            \/home/mgouzenko/Documents/graphics/pa5_release/lib/pngj-2.1.1.jar:
+            \/home/mgouzenko/Documents/graphics/pa5_release/lib/lwjgl/*.jar:
+            \/home/mgouzenko/Documents/graphics/pa5_release/lib/ejml-v0.30-libs/*.jar'
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -299,12 +302,13 @@ autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
 " Vim rooter {{{
 let g:rooter_change_directory_for_non_project_files = 'current'
-let g:rooter_patterns = ['Rakefile', '.git/', 'build.xml']
+let g:rooter_patterns = ['Rakefile', '.git/', 'build.xml', 'cscope.out']
 " }}}
 
 " vim-session {{{
-let g:session_autoload = 'yes'
-let g:session_autosave = 'yes'
+" let g:session_autoload = 'yes'
+" let g:session_autosave = 'yes'
+let g:session_autoload = 'no'
 " }}}
 
 " Rainbow parentheses {{{
@@ -343,8 +347,12 @@ set rtp+=~/.vim/bundle/Vundle.vim
 filetype off
 call vundle#begin()
 
-Plugin 'mkarmona/materialbox'
+Plugin 'jwilm/i3-vim-focus'
 
+
+" Colorschemes
+Plugin 'KeitaNakamura/neodark.vim'
+Plugin 'tomasr/molokai'
 Plugin 'godlygeek/csapprox'
 
 Plugin 'mgouzenko/codesearch_selector.vim'
@@ -422,12 +430,12 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'SirVer/ultisnips'
 
 " Notes
-Plugin 'xolox/vim-notes'
+" Plugin 'xolox/vim-notes'
 
 " vim wiki
 Plugin 'vimwiki/vimwiki'
 
-" Vim misc required by vim notes
+" Vim misc required by vim notes and vim-session
 Plugin 'xolox/vim-misc'
 
 " Git plugin
@@ -468,5 +476,12 @@ call vundle#end()
 
 filetype plugin indent on
 " }}}
+" }}}
+" colorscheme {{{
+" set background=light
+" colorscheme desertEx
+" colorscheme molokai
+" colorscheme transparent
+colorscheme neodark
 " }}}
 " vim:foldmethod=marker:foldlevel=0
