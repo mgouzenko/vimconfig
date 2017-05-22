@@ -101,6 +101,10 @@ nnoremap <silent> t :Tagbar<CR>
 " Backspace goes backwards in the jumplist
 nnoremap <bs> <C-o>
 
+" Move code blocks up and down visually
+vnoremap <c-j> :m '>+1<CR>gv=gv
+vnoremap <c-k> :m '<-2<CR>gv=gv
+
 " Ctrl-hjkl resizes windows
 nnoremap <silent><C-j> :resize +3<CR>
 nnoremap <silent><C-k> :resize -3<CR>
@@ -243,9 +247,9 @@ au FileType python,c,java setlocal formatoptions=qrjcb
 
 " UltiSnips {{{
 " Trigger configuration.
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:UltiSnipsExpandTrigger="<c-]>"
+let g:UltiSnipsJumpForwardTrigger="<c-]>"
+let g:UltiSnipsJumpBackwardTrigger="<c-[>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
@@ -289,7 +293,7 @@ let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_config.py'
 " }}}
 
 " vim-notes {{{
-let g:notes_directories = ['~/google_drive/notes']
+" let g:notes_directories = ['~/google_drive/notes']
 " }}}
 
 " VimWiki {{{
@@ -428,9 +432,6 @@ Plugin 'Valloric/YouCompleteMe'
 
 " Snippet expansion.
 Plugin 'SirVer/ultisnips'
-
-" Notes
-" Plugin 'xolox/vim-notes'
 
 " vim wiki
 Plugin 'vimwiki/vimwiki'
